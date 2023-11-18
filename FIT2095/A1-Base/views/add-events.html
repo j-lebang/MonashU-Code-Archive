@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management App</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .list {
+            text-align: center;
+        }
+        .header {
+            width: 98%;
+            height: 156px;
+            margin: 10px;
+            background: #3498db; /* Blue color */
+            color: #fff; /* White text color */
+            font-weight: 900;
+            line-height: 150px;
+            font-size: 80px;
+        }
+        p {
+            margin-bottom: 40px;
+            color: #3498db; /* Blue color for paragraph */
+        }
+        .main {
+            font-size: 36px; /* Increased font size for "Add Event" */
+        }
+        .el-form {
+            width: 60%;
+            margin: 0 auto; /* Center-align the form */
+        }
+        .el-form--label-top .el-form-item__label {
+            padding: 0px !important;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #3498db; /* Blue border */
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db; /* Blue header background */
+            color: white; /* White text color for header */
+        }
+        .el-button {
+            background-color: #3498db; /* Blue button background */
+            color: white; /* White text color for button */
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .el-button:hover {
+            background-color: #2980b9; 
+        }
+        input[type="text"], textarea {
+            width: 100%; 
+            padding: 8px; 
+            box-sizing: border-box; 
+        }
+        input[type="number"], textarea {
+            width: 100%; 
+            padding: 8px; 
+            box-sizing: border-box; 
+        }
+    </style>
+</head>
+<body>
+    <div class="list">
+        <div class="header">Event Management App</div>
+        <div class="main">Add Event</div>
+        <p>Fill in event details & click submit</p>
+        <form action="/YantaoHe/add-event/save" method="post" class="el-form" size="mini">
+            <table>
+                <tr>
+                    <td><label for="Name">Name</label></td>
+                    <td><input id="Name" name="Name" type="text" placeholder="Enter event name"required></td>
+                </tr>
+                <tr>
+                    <td><label for="Desc">Description</label></td>
+                    <td><textarea id="Desc" name="Desc"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="Image">Image</label></td>
+                    <td><input id="Image" name="Image" type="text" placeholder="Enter static resource path"></td>
+                </tr>
+                <tr>
+                    <td><label for="StartDateTime">Start Date Time</label></td>
+                    <td><input id="StartDateTime" name="StartDateTime" type="datetime-local" placeholder="dd/mm/yyyy,--:--:--" required></td>
+                </tr>
+                <tr>
+                    <td><label for="DurationInMinutes">Duration In Minutes</label></td>
+                    <td><input id="DurationInMinutes" name="DurationInMinutes" type="text" placeholder="Enter duration in minutes" required></td>
+                </tr>
+                <tr>
+                    <td><label for="IsActive">Is Active</label></td>
+                    <td><input id="IsActive" name="IsActive" type="checkbox"></td>
+                </tr>
+                <tr>
+                    <td><label for="Capacity">Capacity</label></td>
+                    <td><input id="Capacity" name="Capacity" type="number" placeholder="Enter capacity"></td>
+                </tr>
+                <tr>
+                    <td><label for="TicketsAvailable">Tickets Available</label></td>
+                    <td><input id="TicketsAvailable" name="TicketsAvailable" type="number" placeholder="Tickets Available(optional)" ></td>
+                </tr>
+                <tr>
+                    <td><label for="CategoryId">Category Id</label></td>
+                    <td><input id="CategoryId" name="CategoryId" type="text" placeholder="Enter category Id" required></td>
+                </tr>
+            </table>
+            <br>
+            <button type="submit" class="el-button">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

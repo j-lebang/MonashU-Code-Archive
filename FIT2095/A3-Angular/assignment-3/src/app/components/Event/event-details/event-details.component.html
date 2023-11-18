@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .list {
+            text-align: center;
+        }
+        .header {
+            width: 98%;
+            font-family: "Times New Roman", serif;
+            height: 156px;
+            margin: 10px;
+            background: #3498db; 
+            color: #fff; 
+            font-weight: 900;
+            line-height: 156px;
+            font-size: 80px;
+        }
+        p {
+            margin-bottom: 40px;
+            color: #3498db; 
+        }
+        .el-form {
+            width: 60%;
+            margin: 0 auto; 
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #3498db; 
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #3498db; 
+            color: white; 
+        }
+        .el-button {
+            background-color: #3498db; 
+            color: white; 
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .el-button:hover {
+            background-color: #2980b9; 
+        }
+        input[type="text"], textarea {
+            width: 100%; 
+            padding: 8px; 
+            box-sizing: border-box; 
+        }
+        body {
+            font-family: "Times New Roman", serif; 
+        }
+        .text-primary {
+            font-family: "Times New Roman", serif; 
+        }
+        h1 ,h2, h3 {
+            font-family: "Times New Roman", serif; 
+        }
+        p {
+            font-family: "Times New Roman", serif; 
+        }
+        .image-container {
+            width: 200px;
+            height: 200px;
+        }
+        .event-box {
+            text-align: left;
+            border: 1px solid lightgray;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            width: 70%;
+            margin: 0 auto;
+        }
+        .event-h {
+            padding: 4px;
+            font-weight: bold;
+        }
+        .event-p {
+            padding: 4px;
+            color:black;
+        }
+        .center-text {
+            text-align: center;
+        }
+        .delete-button {
+            background-color: #ff0000; 
+            color: #ffffff; 
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="list">
+        <div class="header">Event Management App</div>
+        <div *ngFor="let event of records" class="event-box">
+            <h1 class="center-text">{{ event.name }}</h1>
+            <h2 class="event-h">Event ID</h2>
+            <p class="event-p">{{ event.id }}</p>
+            <h2 class="event-h">Name</h2>
+            <p class="event-p">{{ event.name }}</p>
+            <h2 class="event-h">Description</h2>
+            <p class="event-p">{{ event.desc }}</p>
+            <h2 class="event-h">Image</h2>
+            <p class="event-p">{{ event.image }}</p>
+            <h2 class="event-h">Start Date Time</h2>
+            <p class="event-p">{{ event.startDateTime }}</p>
+            <h2 class="event-h">End Date Time</h2>
+            <p class="event-p">{{ calculateEndTime(event.startDateTime, event.durationInMinutes) }}</p>
+            <h2 class="event-h">Duration (In Minutes)</h2>
+            <p class="event-p">{{ event.durationInMinutes }}</p>
+            <h2 class="event-h">Is Active</h2>
+            <p class="event-p">{{ event.isActive }}</p>
+            <h2 class="event-h">Capacity</h2>
+            <p class="event-p">{{ event.capacity }}</p>
+            <h2 class="event-h">Tickets Available</h2>
+            <p class="event-p">{{ event.ticketsAvailable }}</p>
+            <h2 class="event-h">Category ID</h2>
+            <p class="event-p">{{ getCategoryIds(event.categoryList) }}</p>
+        </div>
+    </div>
+</body>

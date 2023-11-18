@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="list">
+    <div class="header">Event Management App</div>
+    <div class="main">Add Category</div>
+    <p>Fill in category details & click submit</p>
+    <form class="el-form" size="mini" (ngSubmit)="saveCategory()">
+      <table>
+        <tr>
+          <td><label for="name">Name</label></td>
+          <td><input id="name" name="name" type="text" placeholder="Enter category name" required [(ngModel)]="category.name"></td>
+        </tr>
+        <tr>
+          <td><label for="desc">Description</label></td>
+          <td><textarea id="desc" name="desc" [(ngModel)]="category.desc"></textarea></td>
+        </tr>
+        <tr>
+          <td><label for="image">Image</label></td>
+          <td><input id="image" name="image" type="text" placeholder="Enter static resource path" [(ngModel)]="category.image"></td>
+        </tr>
+      </table>
+      <br>
+      <button type="submit" class="el-button">Submit</button>
+    </form>
+  </div>
+</body>
+</html>

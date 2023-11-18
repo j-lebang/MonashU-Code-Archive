@@ -1,0 +1,55 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Times New Roman', serif;
+}
+.list {
+  text-align: center;
+}
+.header {
+  width: 98%;
+  height: 156px;
+  margin: 10px;
+  background: #3498db; /* Blue color */
+  color: #fff; /* White text color */
+  font-weight: 900;
+  line-height: 150px;
+  font-size: 80px;
+}
+.main {
+  font-size: 36px; /* Increased font size for "Add Event" */
+}
+.el-form {
+  width: 60%;
+  margin: 0 auto; /* Center-align the form */
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+  border: 1px solid #3498db; /* Blue border */
+  padding: 10px;
+  text-align: left;
+}
+th {
+  background-color: #3498db; /* Blue header background */
+  color: white; /* White text color for header */
+}
+.el-button {
+  font-size: large;
+  background-color: #3498db; 
+  color: white; 
+  border: none;
+  padding: 20px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.el-button:hover {
+  background-color: #3498db; 
+}
+input[type="text"], textarea {
+  width: 100%; 
+  padding: 8px; 
+  box-sizing: border-box; 
+}

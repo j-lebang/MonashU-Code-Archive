@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: category.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: category.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const express = require("express");
+const path = require("path");
+
+const Category = require("../models/category");
+const CategoryCont = require("../controllers/category-controller");
+const Event = require("../models/events");
+const { calculateEndTime } = require("../public/js/calcendtime");
+
+const router = express.Router();
+
+/**
+ * Send file for adding new category
+ * @name get/add-category
+ * @param {string} endpoint
+ * @param {Function} callback
+ */
+router.get("/add-category", function(req, res) {
+    res.sendFile(path.join(__dirname, "../views", "add-category.html"));
+});
+
+/**
+ * Process the new category and sends it to the database
+ * @name post/add-category
+ * @param {String} endpoint
+ * @param {Function} callback
+ */
+router.post("/add-category", CategoryCont.addCategory);
+
+/**
+ * Render and show all category list
+ * @name get/event-categories
+ * @param {string} endpoint
+ * @param {Function} callback
+ */
+router.get("/event-categories", async function(req, res) {
+    let category = await Category.Category.find({});
+    res.render(path.join(__dirname, "../views", "event-categories.html"), { db: category });
+});
+
+/**
+ * Search category by keyword
+ * @name get/seach-category
+ * @param {string} endpoint
+ * @param {Function} callback
+ */
+router.get("/search-category", async function(req, res) {
+    let keyword = String(req.query.keyword);
+    keyword = keyword.toLowerCase();
+
+    let category = await Category.Category.find({});
+
+    let result = [];
+    for (let i = 0; i &lt; category.length; i++) {
+        let lowercase = String(category[i].desc).toLowerCase();
+        if (lowercase.includes(keyword)) { result.push(category[i]); }
+    }
+
+    res.render(path.join(__dirname, "../views", "event-categories.html"), { db: result });
+});
+
+/**
+ * Send file for deleting category by ID
+ * @name get/delete-category
+ * @param {string} endpoint
+ * @param {Function} callback
+ */
+router.get("/delete-category", function(req, res) {
+    res.sendFile(path.join(__dirname, "../views", "delete-category.html"));
+});
+
+/**
+ * Process and delete category which matches the ID given,
+ * and deletes all events in the given category
+ * @name post/delete-category
+ * @param {String} endpoint
+ * @param {Function} callback
+ */
+router.post("/delete-category", CategoryCont.deleteCategory);
+
+/**
+ * Show Event Details
+ * Default page when no id is entered
+ * @name get/event
+ * @param {string} endpoint
+ * @param {Function} callback
+ */
+router.get("/event", function(req, res) {
+    let temp = [{
+        id: "",
+        name: "",
+        desc: "",
+        image: path.join(__dirname, "../images", "unload.png"),
+        startDateTime: "",
+        durationInMinutes: "",
+        isActive: "",
+        capacity: "",
+        ticketsAvailable: "",
+        categoryId: ""
+    }];
+
+    res.render(path.join(__dirname, "../views", "event.html"), { db: temp, calculateEndTime: calculateEndTime });
+});
+
+/**
+ * Show event details by Event ID
+ * @name get/event/:id
+ * @param {string} endpoint
+ * @param {Function} callback
+ */
+router.get("/event/:id", async function(req, res) {
+    let id = req.params.id;
+    let event = await Event.Event.find({ id: id });
+
+    res.render(path.join(__dirname, "../views", "event.html"), { db: event, calculateEndTime: calculateEndTime });
+});
+
+module.exports = router;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#get/add-category">get/add-category</a></li><li><a href="global.html#get/add-event">get/add-event</a></li><li><a href="global.html#get/category">get/category</a></li><li><a href="global.html#get/category/:id">get/category/:id</a></li><li><a href="global.html#get/delete-category">get/delete-category</a></li><li><a href="global.html#get/delete-event">get/delete-event</a></li><li><a href="global.html#get/event">get/event</a></li><li><a href="global.html#get/event-categories">get/event-categories</a></li><li><a href="global.html#get/event/:id">get/event/:id</a></li><li><a href="global.html#get/events">get/events</a></li><li><a href="global.html#get/seach-category">get/seach-category</a></li><li><a href="global.html#get/sold-out-events">get/sold-out-events</a></li><li><a href="global.html#post/add-category">post/add-category</a></li><li><a href="global.html#post/delete-category">post/delete-category</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Sep 15 2023 20:03:01 GMT+1000 (Australian Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+.button-link {
+  background-color: #7ab8e1;
+  padding: 8px 16px; 
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-family: Arial, sans-serif; 
+}

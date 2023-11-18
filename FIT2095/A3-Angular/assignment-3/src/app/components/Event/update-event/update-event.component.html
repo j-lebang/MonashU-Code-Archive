@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management App</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .list {
+            text-align: center;
+        }
+        .header {
+            width: 98%;
+            font-family: "Times New Roman", serif;
+            height: 156px;
+            margin: 10px;
+            background: #3498db; 
+            color: #fff; 
+            font-weight: 900;
+            line-height: 156px;
+            font-size: 80px;
+        }
+        p {
+            margin-bottom: 40px;
+            color: #3498db; 
+        }
+        .main {
+            font-size: 36px; 
+        }
+        .el-form {
+            width: 60%;
+            margin: 0 auto; 
+        }
+        .el-form--label-top .el-form-item__label {
+            padding: 0px !important;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #3498db; /* Blue border */
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db; 
+            color: white;
+        }
+        .el-button {
+            background-color: #3498db; 
+            color: white; 
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .el-button:hover {
+            background-color: #2980b9; 
+        }
+        input[type="text"], textarea {
+            width: 100%; 
+            padding: 8px; 
+            box-sizing: border-box; 
+        }
+        input[type="number"], textarea {
+            width: 100%; 
+            padding: 8px; 
+            box-sizing: border-box; 
+        }
+        button:disabled {
+            cursor: not-allowed;
+        }
+        .selected {
+          background-color: rgb(213, 162, 22);
+        }
+    </style>
+</head>
+<body>
+    <div class="list">
+        <div class="header">Event Management App</div>
+        <div class="main">Update Event</div>
+        <p>Fill in event details & click submit</p>
+        <form [formGroup]="eventForm" (ngSubmit)="saveEvent()" class="el-form" size="mini">
+            <table>
+              <tr>
+                <td><label for="Name">Name</label></td>
+                <td>
+                    <input id="Name" name="name" type="text" formControlName="name"  placeholder="Enter event name" required>
+                  <div *ngIf="eventForm.controls.name.invalid && (eventForm.controls.name.dirty || eventForm.controls.name.touched)" class="alert alert-danger">
+                    Name is required.
+                  </div>
+                </td>
+              </tr>
+              
+              <tr>
+                <td><label for="Capacity">Capacity</label></td>
+                <td>
+                    <input id="Capacity" name="capacity" type="number" formControlName="capacity"  placeholder="Enter capacity">
+                  
+                </td>
+              
+            </table>
+            <br>
+            <button type="submit" class="el-button" [disabled]="!eventForm.valid">update</button>
+          </form>
+          <div class="event-box container mt-3" id="eventBox">
+
+          </div>
+          <table class="table">
+              <thead class="table-primary">
+                  <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Start</th>
+                      <th>End</th>
+                      <th>Duration</th>
+                      <th>Active</th>
+                      <th>Capacity</th>
+                      <th>Tickets Available</th>
+                      <th>Category ID</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let event of records">
+                      <td>{{ event.id }}</td>
+                      <td>{{ event.name }}</td>
+                      <td>{{ getLocalDateString(event.startDateTime) }}</td>
+                      <td>{{ calculateEndTime(event.startDateTime, event.durationInMinutes) }}</td>
+                      <td>{{ transferTime(event.durationInMinutes) }}</td>
+                      <td>
+                          <input *ngIf="event.isActive === 'on'" type="checkbox" checked disabled />
+                          <input *ngIf="event.isActive !== 'on'" type="checkbox" disabled />
+                      </td>
+                      <td>{{ event.capacity }}</td>
+                      <td>{{ event.ticketsAvailable }}</td>
+                      <td>{{ getCategoryIds(event.categoryList) }}</td>
+                      <td><button (click)="selectEvent(event)"class="el-button" [class.selected]="event === selectedEvent">Select</button></td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    
+</body>
+</html>
